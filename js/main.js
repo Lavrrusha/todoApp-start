@@ -9,11 +9,10 @@ const tasksList = document.querySelector('#tasksList')
 const emptyList = document.querySelector('#emptyList')
 
 
-// const form = document.querySelector('#form')
+form.addEventListener ('submit', addTask)
 
-form.addEventListener ('submit', function (event) {
-
-    // Отменяем отправку формы
+function addTask(event) {
+	// Отменяем отправку формы
     event.preventDefault()
 
     // Достаём текст задачи из поля ввода
@@ -46,5 +45,7 @@ form.addEventListener ('submit', function (event) {
 		emptyList.classList.add('none')
 	}
 
-})
+}
+
+
 
