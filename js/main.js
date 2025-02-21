@@ -6,6 +6,8 @@ const taskInput = document.querySelector('#taskInput')
 
 const tasksList = document.querySelector('#tasksList')
 
+const emptyList = document.querySelector('#emptyList')
+
 
 // const form = document.querySelector('#form')
 
@@ -39,6 +41,10 @@ form.addEventListener ('submit', function (event) {
 	taskInput.value = ''
 	taskInput.focus()
 
+	// Проверка. Если в списке задач более 1-го элемента, скрываем блок "Список дел пуст"
+	if (tasksList.children.length > 1) {
+		emptyList.classList.add('none')
+	}
 
 })
 
