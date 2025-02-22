@@ -8,18 +8,22 @@ const tasksList = document.querySelector('#tasksList')
 
 const emptyList = document.querySelector('#emptyList')
 
+// Добавление задачи
+form.addEventListener('submit', addTask)
 
-form.addEventListener ('submit', addTask)
+// Удаление задачи
+
+tasksList.addEventListener('click', deleteTask)
 
 function addTask(event) {
 	// Отменяем отправку формы
-    event.preventDefault()
+	event.preventDefault()
 
-    // Достаём текст задачи из поля ввода
-    const taskText = taskInput.value
+	// Достаём текст задачи из поля ввода
+	const taskText = taskInput.value
 
-    // Формируем разметку для новой задачи
-    const taskHTML = `
+	// Формируем разметку для новой задачи
+	const taskHTML = `
         	<li class="list-group-item d-flex justify-content-between task-item">
 					<span class="task-title">${taskText}</span>
 					<div class="task-item__buttons">
@@ -33,8 +37,8 @@ function addTask(event) {
 				</li>
     `
 
-    // Добавляем задачу на страницу
-    tasksList.insertAdjacentHTML('beforeend', taskHTML)
+	// Добавляем задачу на страницу
+	tasksList.insertAdjacentHTML('beforeend', taskHTML)
 
 	// Очищаем поле ввода и возвращаем на него фокус
 	taskInput.value = ''
@@ -47,5 +51,17 @@ function addTask(event) {
 
 }
 
+function deleteTask(event) {
+
+	// Проверяем, что клик был по кнопке 'Удалить задачу'
+	if (event.target.dataset.action === 'delete') {
+		const parentNode = event.target.closest('.list-group-item')
+		parentNode.remove()
+	}
+
+	if (tasksList.children.length <= 1) {
+		emptyList.classList.remove('none')
+	}
+}
 
 
