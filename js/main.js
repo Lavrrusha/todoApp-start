@@ -12,8 +12,11 @@ const emptyList = document.querySelector('#emptyList')
 form.addEventListener('submit', addTask)
 
 // Удаление задачи
-
 tasksList.addEventListener('click', deleteTask)
+
+// Отмечаем задачу завершённой
+tasksList.addEventListener('click', doneTask)
+
 
 function addTask(event) {
 	// Отменяем отправку формы
@@ -63,5 +66,16 @@ function deleteTask(event) {
 		emptyList.classList.remove('none')
 	}
 }
+
+function doneTask(event) {
+
+	// Проверяем, что клик был по кнопке "задача выполнена"
+	if (event.target.dataset.action === 'done') {
+		const parentNode = event.target.closest('.list-group-item')
+		const taskTitle = parentNode.querySelector('.task-title')
+		taskTitle.classList.toggle('task-title--done')
+	}
+}
+
 
 
