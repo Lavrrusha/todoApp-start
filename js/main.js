@@ -8,6 +8,11 @@ const tasksList = document.querySelector('#tasksList')
 
 const emptyList = document.querySelector('#emptyList')
 
+
+let tasks = []
+
+
+
 // Добавление задачи
 form.addEventListener('submit', addTask)
 
@@ -25,10 +30,24 @@ function addTask(event) {
 	// Достаём текст задачи из поля ввода
 	const taskText = taskInput.value
 
+	// Описываем задачу в виде объекта
+	const newTask = {
+		id: Date.now(),
+		text: taskText,
+		done: false
+	}
+
+	// Добавляем задачу в массив с задачами
+
+	tasks.push(newTask)
+
+	// Формируем CSS класс
+	const cssClass = newTask.done ? "task-title task-title--done" : "task-title"
+
 	// Формируем разметку для новой задачи
 	const taskHTML = `
-        	<li class="list-group-item d-flex justify-content-between task-item">
-					<span class="task-title">${taskText}</span>
+        	<li id="${newTask.id}" class="list-group-item d-flex justify-content-between task-item">
+					<span class="${cssClass}">${newTask.text}</span>
 					<div class="task-item__buttons">
 						<button type="button" data-action="done" class="btn-action">
 							<img src="./img/tick.svg" alt="Done" width="18" height="18">
